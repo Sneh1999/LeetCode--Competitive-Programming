@@ -2,57 +2,41 @@
  * @param {number} n
  * @return {boolean}
  * 
- * Write an algorithm to determine if a number is "happy".
+ 1108. Defanging an IP Address
+ Given a valid (IPv4) IP address, return a defanged version of that IP address.
 
-A happy number is a number defined by the following process: Starting with any positive integer, replace the number by the sum of the squares of its digits, and repeat the process until the number equals 1 (where it will stay), or it loops endlessly in a cycle which does not include 1. Those numbers for which this process ends in 1 are happy numbers.
+A defanged IP address replaces every period "." with "[.]".
 
-Example: 
+ 
 
-Input: 19
-Output: true
-Explanation: 
-12 + 92 = 82
-82 + 22 = 68
-62 + 82 = 100
-12 + 02 + 02 = 1
+Example 1:
+
+Input: address = "1.1.1.1"
+Output: "1[.]1[.]1[.]1"
+Example 2:
+
+Input: address = "255.100.50.0"
+Output: "255[.]100[.]50[.]0"
 
  */
-var isHappy = function(n) {
-    var r = []
-    k = 0 
-    var sum = 0 
-    if(n===1){
-        return true
-    }
-    if(parseInt(n/10) === 0){
-        return false
-    }
-    while(sum !== 1){
-    while(n!==0){
-        r.push(parseInt((n)%10))
-        n =parseInt((n)/10)
-        
-    }
-    console.log(r)
-    for (var i = 0 ;i<r.length;i++){
-        sum = r[i]*r[i]
-        
-    }
-        if(sum !== 1){
-             n = sum
+/**
+ * @param {string} address
+ * @return {string}
+ */
+var defangIPaddr = function(address) {
+   
+    var add = '';
+   for(var i =0 ;i<address.length;i++){
+        if(address[i]==='.'){
+          add = add + '['
+           add = add + '.'
+           add = add + ']'
         }
-        if(k <100){
-            k++ 
-        }
-        if(k>100){
-            return false
-        }
+       else{
+           add = add + address[i]
+         
+       }
        
-       
-    }
-    if(sum ===1){
-          return true
-    }
- 
-    
+      }
+    return add
 };
