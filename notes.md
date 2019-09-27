@@ -15,3 +15,14 @@
     s.insert({nums[i], nums[l], nums[r]});
     }
  ```
+- String reversal technique 
+  ```
+  int main()
+{
+    std::string foo("foo");
+    std::string copy(foo);
+
+    std::reverse(copy.begin(), copy.end());
+    std::cout << foo << '\n' << copy << '\n';
+}
+  ```
