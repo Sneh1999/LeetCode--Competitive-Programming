@@ -9,4 +9,9 @@
   set<int> st; 
    for (it1 = st.begin(); it1!=st.end();  ++it1) 
         cout << *it1 << " "; 
+   set<vector<int>>s;
+   if(s.find({nums[i], nums[l], nums[r]}) == s.end()){
+    v.push_back({nums[i], nums[l], nums[r]});
+    s.insert({nums[i], nums[l], nums[r]});
+    }
  ```
