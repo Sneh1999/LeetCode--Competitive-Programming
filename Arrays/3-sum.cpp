@@ -23,58 +23,42 @@ A solution set is:
 */
 
 
+#include <algorithm>
+
 class Solution {
 public:
     vector<vector<int>> threeSum(vector<int>& nums) {
         
-        vector<vector<int>> v;
-        
-        if(nums.size() < 3){
-            return v;
-        }
-        
-        bool flag = true;
-        
-        for(int i =0 ;i<nums.size();i++){
-            
-            if(nums[i] != 0){
-                flag = false;
-                break;
-            }
-        }
-        
-        if(flag){
-            v.push_back({0,0,0});
-            return v;
-        }
-        
-        set<vector<int>>s;
-        
-        sort(nums.begin(),nums.end());
-        
-        for(int i = 0 ;i<nums.size()-2; i++){
-            int second = i+1;
-            int third = nums.size() - 1;
-            
-            while(second < third){
-                if(nums[i] + nums[second] + nums[third] == 0){
-                    if(s.find({nums[i] ,nums[second] , nums[third]}) == s.end()){
-                        v.push_back({nums[i] ,nums[second] ,nums[third]});
-                        //the step is here to ensure that the numbers are distinct because set helps keep distinct                              numbers 
-                        s.insert({nums[i],nums[second],nums[third]});
-                    }
-                    second++;
+       vector<vector<int>> result;
+        int left;
+        int right;
+      if(nums.empty() || nums.size()<3){
+          return result;
+      }
+    sort(nums.begin(),nums.end());
+        for(int i =0 ;i<nums.size()-2;i++){
+            if (nums[i] > 0) break;
+            if(i> 0 && nums[i-1] == nums[i] ) continue;
+            int left = i+1;
+            int right = nums.size()-1;
+            while(left < right ){
+                int sum = nums[i] + nums[left] + nums[right];
+                if(sum == 0){
+                    result.push_back({nums[i],nums[left],nums[right]});
+                    while(left<right && nums[left] == nums[left+1] ) ++left;
+                     while(left<right && nums[right] == nums[right-1] ) --right;
+                    ++left ;
+                    --right;
                 }
-                    else if(nums[i] + nums[second] < -nums[third]){
-                        //this happens that as we have more negative we need more positive so we add the second
-                        second++;
-                    }
-                    else{
-                        third--;
-                    }
+                else if(sum<0){
+                    ++left;
+                }
+                else{
+                    --right;
                 }
             }
-        
-        return v;
+        }
+        return result;
     }
+
 };
